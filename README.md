@@ -7,7 +7,7 @@
 - `--config CONFIG`, `-f CONFIG` -- path to configuration file
 - `--text`, `-T` -- fetch plain text content (Look out for BOM)
 - `--html`, `-H` -- fetch HTML content
-- `--mime-type` -- specify arbitrary mime type
+- `--mime-type` -- specify exactly ONE [mime type](https://developers.google.com/drive/v3/web/integrate-open#open_and_convert_google_docs_in_your_app) of file
 
 ## Example usage:
 

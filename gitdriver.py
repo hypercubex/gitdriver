@@ -48,7 +48,7 @@ def main():
 
     # Iterate over the revisions (from oldest to newest).
     for rev in gd.revisions(opts.docid):
-        print rev
+        # print rev
         with open('content', 'w') as fd:
             if 'exportLinks' in rev and not opts.raw:
                 # If the file provides an 'exportLinks' dictionary,

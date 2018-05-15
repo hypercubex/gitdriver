@@ -48,7 +48,7 @@ def main():
 
     # Iterate over the revisions (from oldest to newest).
     for rev in gd.revisions(opts.docid):
-        # print rev
+        print rev
         with open('content', 'w') as fd:
             if 'exportLinks' in rev and not opts.raw:
                 # If the file provides an 'exportLinks' dictionary,
@@ -67,7 +67,7 @@ def main():
         # Commit changes to repository.
         subprocess.call(['git', 'add', 'content'])
         subprocess.call(['git',
-            'commit', '--author="%s <%s>"' % (rev['lastModifyingUserName'], rev['lastModifyingUser']['emailAddress']),
+            'commit', '--author="%s <%s>"' % (rev.get('lastModifyingUserName'), rev.get('lastModifyingUser', 'emailAddress')),
             '-m', 'doc: import revision from %s' % rev['modifiedDate'],
 
             ])

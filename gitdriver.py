@@ -67,7 +67,7 @@ def main():
         # Commit changes to repository.
         subprocess.call(['git', 'add', 'content'])
         subprocess.call(['git',
-            'commit', '--author="%s <%s>"' % (rev.get('lastModifyingUserName'), rev.get('lastModifyingUser', 'emailAddress')),
+            'commit', '--author="%s <%s>"' % (rev.get('lastModifyingUserName'), rev['lastModifyingUser'].get('emailAddress', '')),
             '-m', 'doc: import revision from %s' % rev['modifiedDate'],
 
             ])

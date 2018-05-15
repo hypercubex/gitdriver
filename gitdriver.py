@@ -18,6 +18,7 @@ def parse_args():
     p.add_argument('--mime-type', dest='mime_type')
     p.add_argument('--raw', '-R', action='store_true',
             help='Download original document if possible.')
+    p.add_argument('--out', '-o', default='content', dest='output')
     p.add_argument('docid')
 
     return p.parse_args()
@@ -49,7 +50,7 @@ def main():
     # Iterate over the revisions (from oldest to newest).
     for rev in gd.revisions(opts.docid):
         # print rev
-        with open('content', 'w') as fd:
+        with open(opts.output, 'w') as fd:
             if 'exportLinks' in rev and not opts.raw:
                 # If the file provides an 'exportLinks' dictionary,
                 # download the requested MIME type.
@@ -65,7 +66,7 @@ def main():
                 fd.write(chunk)
 
         # Commit changes to repository.
-        subprocess.call(['git', 'add', 'content'])
+        subprocess.call(['git', 'add', opts.output])
         subprocess.call(['git',
             'commit', '--author="%s <%s>"' % (rev.get('lastModifyingUserName'), rev['lastModifyingUser'].get('emailAddress', '')),
             '-m', 'doc: import revision from %s' % rev['modifiedDate'],
